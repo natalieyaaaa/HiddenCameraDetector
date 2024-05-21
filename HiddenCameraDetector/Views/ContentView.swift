@@ -44,6 +44,8 @@ struct ContentView: View {
                         }.foregroundStyle(selection == 1 ? .blue : .white)
                     }
                     
+                    Spacer()
+                    
                     Button {
                         selection = 2
                     } label: {
@@ -58,8 +60,48 @@ struct ContentView: View {
                                 .font(.caption)
                         }.foregroundStyle(selection == 2 ? .blue : .white)
                     }
-
-                }
+                    
+                    Spacer()
+                    
+                    Button {
+                        selection = 3
+                    } label: {
+                        VStack(spacing: 4) {
+                            Image("tools")
+                                .renderingMode(.template)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 32)
+                            
+                            Text("Tools")
+                                .font(.caption)
+                        }.foregroundStyle(selection == 3 ? .blue : .white)
+                    }
+                    
+                    Spacer()
+                    
+                    Button {
+                        selection = 4
+                    } label: {
+                        VStack(spacing: 4) {
+                            Image("guides")
+                                .renderingMode(.template)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 32)
+                            
+                            Text("Guides")
+                                .font(.caption)
+                        }.foregroundStyle(selection == 2 ? .blue : .white)
+                    }
+                }.padding(.horizontal, 27)
+                    .padding(.top, 12)
+                    .padding(.bottom, 40)
+                    .background(Color.tabbarBlack)
+                        .cornerRadius(46)
+                        .shadow(color: Color(red: 0.93, green: 0.97, blue: 1).opacity(0.15), radius: 15, x: 0, y: -4)
+                    .offset(y: isSE ? 25 : 50)
+                
             }.zIndex(2)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }.background(Color.black)
