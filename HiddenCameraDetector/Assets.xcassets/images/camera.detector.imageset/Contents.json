@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Icon=camera detector.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
