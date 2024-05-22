@@ -13,6 +13,7 @@ struct HiddenCameraDetectorApp: App {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(.dark)
+                .background(Color.black.ignoresSafeArea())
         }
     }
 }

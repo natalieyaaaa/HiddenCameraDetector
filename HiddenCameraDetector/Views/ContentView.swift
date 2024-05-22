@@ -14,13 +14,17 @@ struct ContentView: View {
         ZStack {
             Group {
                 if selection == 1 {
-                    ScanView()
+                    ScanView(selection: $selection)
                 } else if selection == 2 {
                     CameraDetectorView()
                 } else if selection == 3 {
                     ToolsView()
                 } else if selection == 4 {
                     GuidesView()
+                } else if selection == 4 {
+//                    SettingsView()
+                } else if selection == 5 {
+//                    HistoryView()
                 }
             }.zIndex(1)
             
