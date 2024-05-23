@@ -21,6 +21,7 @@
 		203A318F2BFF3CBF00A0910B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A318E2BFF3CBF00A0910B /* CoreDataManager.swift */; };
 		203A31922BFF4AA600A0910B /* SeeAllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A31912BFF4AA600A0910B /* SeeAllView.swift */; };
 		203A31952BFF4DF000A0910B /* LanScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 203A31942BFF4DF000A0910B /* LanScanner */; };
+		203A31972BFFA5BA00A0910B /* DeviceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A31962BFFA5BA00A0910B /* DeviceDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		203A318C2BFF3C1F00A0910B /* Device.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Device.xcdatamodel; sourceTree = "<group>"; };
 		203A318E2BFF3CBF00A0910B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		203A31912BFF4AA600A0910B /* SeeAllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllView.swift; sourceTree = "<group>"; };
+		203A31962BFFA5BA00A0910B /* DeviceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +96,6 @@
 		203A31792BFCCA6A00A0910B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				203A31872BFF34A600A0910B /* Elements */,
 				203A316D2BFCC3B900A0910B /* ContentView.swift */,
 				203A317A2BFCCA7700A0910B /* Tabs */,
 			);
@@ -142,6 +143,8 @@
 			children = (
 				203A317B2BFCCA8E00A0910B /* ScanView.swift */,
 				203A31912BFF4AA600A0910B /* SeeAllView.swift */,
+				203A31872BFF34A600A0910B /* Elements */,
+				203A31962BFFA5BA00A0910B /* DeviceDetailView.swift */,
 			);
 			path = ScanView;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				203A317E2BFCCAA300A0910B /* CameraDetectorView.swift in Sources */,
 				203A316C2BFCC3B900A0910B /* HiddenCameraDetectorApp.swift in Sources */,
 				203A31892BFF34DD00A0910B /* DeviceShortView.swift in Sources */,
+				203A31972BFFA5BA00A0910B /* DeviceDetailView.swift in Sources */,
 				203A31922BFF4AA600A0910B /* SeeAllView.swift in Sources */,
 				203A317C2BFCCA8E00A0910B /* ScanView.swift in Sources */,
 				203A31802BFCCAAE00A0910B /* ToolsView.swift in Sources */,

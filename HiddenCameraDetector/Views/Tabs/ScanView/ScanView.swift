@@ -45,7 +45,9 @@ struct ScanView: View {
                         .padding(.bottom, 32)
                     
                     Button {
-                        vm.scanButton()
+                        withAnimation {
+                            vm.scanButton()
+                        }
                     } label: {
                         Text(vm.buttonText)
                             .foregroundStyle(.blue)
@@ -87,9 +89,11 @@ struct ScanView: View {
                             VStack(spacing: 8) {
                                 ForEach(vm.devices, id: \.id) {device in
                                     NavigationLink {
-                                        
+                                        DeviceDetailView(device: device, isSuspicious: $vm.isSus)
+                                            .environmentObject(vm)
+                                            .navigationBarBackButtonHidden()
                                     } label: {
-                                        DeviceShortView(isSuspicious: device.id.uuidString.contains("123"), name: device.name, connectionType: device.connectionType)
+                                        DeviceShortView(isSuspicious: device.isSuspicious, name: device.name!, connectionType: device.connectionType!)
                                     }
                                 }
                             }.padding(.horizontal)

@@ -22,6 +22,7 @@ struct DeviceShortView: View {
             Text(name)
                 .foregroundStyle(.white)
                 .font(Font.headline.weight(.medium))
+                .multilineTextAlignment(.leading)
             
             Spacer()
             

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SeeAllView: View {
     
-    @Binding var devices: [DeviceInfo]
+    @Binding var devices: [Device]
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -28,14 +28,14 @@ struct SeeAllView: View {
                 
                 Spacer()
                 
-            }.padding(.bottom, 20)
+            }.padding(.bottom, 10)
             
             ScrollView {
                 ForEach(devices, id: \.id) { device in
                     NavigationLink {
                         
                     } label: {
-                        DeviceShortView(isSuspicious: false, name: device.name, connectionType: device.connectionType)
+                        DeviceShortView(isSuspicious: false, name: device.name ?? "No name", connectionType: device.connectionType ?? "Uknown")
                     }
                 }
             }

@@ -17,86 +17,72 @@ struct DeviceInfo {
     var ipAdress: String
     var id = UUID()
     var date: String
-    
+    var isSuspicious: Bool
 }
 
 final class ScanViewModel: ObservableObject {
     
     @Published var isScanning = false
     @Published var buttonText = "Start"
-    @Published var devices: [DeviceInfo] = []
+    @Published var devicesInfo: [DeviceInfo] = []
+    @Published var devices: [Device] = []
+    @Published var isSus = false
     
     let bluetoothManager = BluetoothManager()
     let lanScanner = CountViewModel()
     let coreData = CoreDataManager.shared
     
+    
     func scanButton() {
-        resetScan()
-        startScanning()
-        resetUIAfterScan()
-    }
-
-    private func resetScan() {
+        
+// MARK: - setting up
         devices.removeAll()
+        devicesInfo.removeAll()
+        bluetoothManager.peripherals.removeAll()
+        lanScanner.connectedDevices.removeAll()
         isScanning = true
-    }
-
-    private func startScanning() {
+        
+//MARK: - scanning
         bluetoothManager.centralManager.scanForPeripherals(withServices: nil, options: nil)
         lanScanner.scanner.start()
         
         Timer.scheduledTimer(withTimeInterval: 0.07, repeats: true) { timer in
-            self.updateProgress()
             
-            if self.scanCompleted() {
-                self.finalizeScan()
+            var intText = Int(self.buttonText.replacingOccurrences(of: "%", with: "")) ?? 0
+            intText += 1
+            self.buttonText = "\(intText)%"
+            
+//MARK: - stopping scanning
+            if intText >= 100 {
                 timer.invalidate()
+                guard !self.bluetoothManager.peripherals.isEmpty else {return}
+                for device in self.bluetoothManager.peripherals {
+                    self.devicesInfo.append(device)
+                }
+                
+                guard !self.lanScanner.connectedDevices.isEmpty else {return}
+                for device in self.lanScanner.connectedDevices {
+                    self.devicesInfo.append(DeviceInfo(name: device.name, connectionType: "Wi-Fi", ipAdress: device.ipAddress, id: device.id, date: formatDateToString(date: .now), isSuspicious: device.id.uuidString.contains("123")))
+                }
+                
+                self.bluetoothManager.centralManager.stopScan()
+                self.lanScanner.scanner.stop()
+             
+//MARK: - saving devices
+                for item in self.devicesInfo {
+                    self.coreData.saveEntity(name: item.name, ipAdress: item.ipAdress, id: UUID(), date: item.date, connectionType: item.connectionType, isSuspicious: item.isSuspicious)
+                   
+                }
+//MARK: - setting out
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.buttonText = "Start"
+                    self.isScanning = false
+                    
+                }
             }
         }
     }
-
-    private func updateProgress() {
-        let currentProgress = Int(buttonText.replacingOccurrences(of: "%", with: "")) ?? 0
-        let newProgress = min(currentProgress + 1, 100)
-        buttonText = "\(newProgress)%"
-    }
-
-    private func scanCompleted() -> Bool {
-        return Int(buttonText.replacingOccurrences(of: "%", with: "")) ?? 0 >= 100
-    }
-
-    private func finalizeScan() {
-        stopScanning()
-        saveDevicesToCoreData()
-        resetUIAfterScan()
-    }
-
-    private func stopScanning() {
-        bluetoothManager.centralManager.stopScan()
-        lanScanner.scanner.stop()
-    }
-
-    private func saveDevicesToCoreData() {
-        for peripheral in bluetoothManager.peripherals {
-            devices.append(peripheral)
-        }
-        
-        for device in lanScanner.connectedDevices {
-            let deviceInfo = DeviceInfo(name: device.name, connectionType: "Wi-Fi", ipAdress: device.ipAddress, id: device.id, date: formatDateToString(date: .now))
-            devices.append(deviceInfo)
-        }
-        
-        for item in devices {
-            coreData.saveEntity(name: item.name, ipAdress: item.ipAdress, id: UUID(), date: item.date, connectionType: item.connectionType)
-        }
-    }
-
-    private func resetUIAfterScan() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.buttonText = "Start"
-            self.isScanning = false
-        }
-    }}
+}
 
 final class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var centralManager: CBCentralManager!
@@ -121,7 +107,7 @@ final class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelega
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         if !peripherals.contains(where: { $0.id == peripheral.identifier }) {
-            peripherals.append(DeviceInfo(name: peripheral.name ?? "Unknown", connectionType: "Bluetooth", ipAdress: "Not Available", id: peripheral.identifier, date: formatDateToString(date: .now)))
+            peripherals.append(DeviceInfo(name: peripheral.name ?? "No name", connectionType: "Bluetooth", ipAdress: "Not Available", id: peripheral.identifier, date: formatDateToString(date: .now), isSuspicious: peripheral.identifier.uuidString.contains("123")))
         }
     }
 }

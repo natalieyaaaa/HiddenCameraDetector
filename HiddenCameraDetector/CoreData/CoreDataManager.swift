@@ -31,13 +31,14 @@ class CoreDataManager: ObservableObject {
         }
     }
     
-    func saveEntity(name: String, ipAdress: String, id: UUID, date: String, connectionType: String) {
+    func saveEntity(name: String, ipAdress: String, id: UUID, date: String, connectionType: String, isSuspicious: Bool) {
         let entity = Device(context: persistentContainer.viewContext)
         entity.name = name
         entity.ipAdress = ipAdress
         entity.id = id
         entity.date = date
         entity.connectionType = connectionType
+        entity.isSuspicious = isSuspicious
         
         do {
             try persistentContainer.viewContext.save()
