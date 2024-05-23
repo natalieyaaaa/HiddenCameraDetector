@@ -11,10 +11,11 @@ struct DeviceShortView: View {
     
     var isSuspicious: Bool
     var name: String
+    var connectionType: String
     
     var body: some View {
         HStack(spacing: 12) {
-            Image("bluetooth")
+            Image(connectionType == "Wi-Fi" ? "wifi" : "bluetooth")
                 .renderingMode(.template)
                 .foregroundStyle(isSuspicious ? .suspiciousRed : .blue)
             

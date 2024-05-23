@@ -24,7 +24,10 @@ struct SeeAllView: View {
                 Text("All")
                     .foregroundStyle(.white)
                     .font(Font.title2.weight(.semibold))
-                    .padding(.leading, isSE ? 110 : 120)
+                    .padding(.leading, isSE ? 110 : 140)
+                
+                Spacer()
+                
             }.padding(.bottom, 20)
             
             ScrollView {
@@ -32,12 +35,12 @@ struct SeeAllView: View {
                     NavigationLink {
                         
                     } label: {
-                        DeviceShortView(isSuspicious: false, name: device.name)
+                        DeviceShortView(isSuspicious: false, name: device.name, connectionType: device.connectionType)
                     }
                 }
             }
             
-        }.padding(.bottom, 40)
+        }.padding(.bottom, 60)
             .padding(.horizontal)
     }
 }

@@ -63,7 +63,12 @@ struct ScanView: View {
                         Spacer()
                         
                         NavigationLink {
-                        
+                            if vm.devices.isEmpty {
+                                
+                            } else {
+                                SeeAllView(devices: $vm.devices)
+                                    .navigationBarBackButtonHidden()
+                            }
                         } label: {
                             Text(vm.devices.isEmpty ? "History" : "See all")
                                 .foregroundStyle(.blue)
@@ -84,7 +89,7 @@ struct ScanView: View {
                                     NavigationLink {
                                         
                                     } label: {
-                                        DeviceShortView(isSuspicious: device.id.uuidString.contains("123"), name: device.name)
+                                        DeviceShortView(isSuspicious: device.id.uuidString.contains("123"), name: device.name, connectionType: device.connectionType)
                                     }
                                 }
                             }.padding(.horizontal)
