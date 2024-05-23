@@ -26,7 +26,6 @@ final class ScanViewModel: ObservableObject {
     @Published var buttonText = "Start"
     @Published var devicesInfo: [DeviceInfo] = []
     @Published var devices: [Device] = []
-    @Published var isSus = false
     
     let bluetoothManager = BluetoothManager()
     let lanScanner = CountViewModel()

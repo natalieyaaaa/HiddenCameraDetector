@@ -11,7 +11,7 @@ struct ScanView: View {
     
     @Binding var selection: Int
     
-    @StateObject var vm = ScanViewModel()
+    @EnvironmentObject var vm: ScanViewModel
     
     var body: some View {
         NavigationView {
@@ -92,6 +92,7 @@ struct ScanView: View {
                                         DeviceDetailView(device: device, isSuspicious: device.isSuspicious)
                                             .environmentObject(vm)
                                             .navigationBarBackButtonHidden()
+                                          
                                     } label: {
                                         DeviceShortView(isSuspicious: device.isSuspicious, name: device.name!, connectionType: device.connectionType!)
                                     }

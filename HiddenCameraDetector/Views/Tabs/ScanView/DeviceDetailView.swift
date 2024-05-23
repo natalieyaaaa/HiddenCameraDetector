@@ -20,6 +20,7 @@ struct DeviceDetailView: View {
         VStack {
             HStack {
                 Button {
+                    vm.coreData.updateEntity()
                     dismiss()
                 } label: {
                     Image("arrow.back")
@@ -50,8 +51,7 @@ struct DeviceDetailView: View {
             
             Button {
                 withAnimation {
-                    isSuspicious.toggle()
-                    vm.isSus.toggle()
+
                 }
             } label: {
                 Text(isSuspicious ? "Mark as secure" : "Mark as suspicious")
@@ -61,14 +61,15 @@ struct DeviceDetailView: View {
                     .background(RoundedRectangle(cornerRadius: 30)
                         .foregroundStyle(isSuspicious ? .suspiciousRed : .blue))
             }.padding(.bottom, 70)
-            
-            .onChange(of: vm.isSus) { newValue in
-                device.isSuspicious = newValue
-                vm.coreData.updateEntity()
-            }
+                .onChange(of: isSuspicious) { newValue in
+                    
+                    device.isSuspicious = newValue
+                    
+                }
             
         }.padding(.horizontal)
             .background(Color.black)
+
     }
 }
 

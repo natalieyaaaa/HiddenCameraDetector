@@ -10,11 +10,14 @@ import SwiftUI
 struct ContentView: View {
     
     @State var selection = 1
+    @StateObject var vm = ScanViewModel()
+    
     var body: some View {
         ZStack {
             Group {
                 if selection == 1 {
                     ScanView(selection: $selection)
+                        .environmentObject(vm)
                 } else if selection == 2 {
                     CameraDetectorView()
                 } else if selection == 3 {
