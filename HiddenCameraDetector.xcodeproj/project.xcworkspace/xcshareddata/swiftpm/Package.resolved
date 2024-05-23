@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "lan-scanner",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MaatheusGois/lan-scanner.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "b5d4cda7161efec0fa042670eaa9bb7aeeba5bee"
+      }
+    }
+  ],
+  "version" : 2
+}

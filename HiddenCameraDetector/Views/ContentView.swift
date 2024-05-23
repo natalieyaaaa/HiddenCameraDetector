@@ -21,11 +21,8 @@ struct ContentView: View {
                     ToolsView()
                 } else if selection == 4 {
                     GuidesView()
-                } else if selection == 4 {
-//                    SettingsView()
-                } else if selection == 5 {
-//                    HistoryView()
                 }
+                
             }.zIndex(1)
             
             VStack {

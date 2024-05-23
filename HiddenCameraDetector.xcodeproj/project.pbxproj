@@ -16,6 +16,11 @@
 		203A31802BFCCAAE00A0910B /* ToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A317F2BFCCAAE00A0910B /* ToolsView.swift */; };
 		203A31822BFCCB2400A0910B /* GuidesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A31812BFCCB2400A0910B /* GuidesView.swift */; };
 		203A31852BFE4F2300A0910B /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A31842BFE4F2300A0910B /* ScanViewModel.swift */; };
+		203A31892BFF34DD00A0910B /* DeviceShortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A31882BFF34DD00A0910B /* DeviceShortView.swift */; };
+		203A318D2BFF3C1F00A0910B /* Devices.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 203A318B2BFF3C1F00A0910B /* Devices.xcdatamodeld */; };
+		203A318F2BFF3CBF00A0910B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A318E2BFF3CBF00A0910B /* CoreDataManager.swift */; };
+		203A31922BFF4AA600A0910B /* SeeAllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A31912BFF4AA600A0910B /* SeeAllView.swift */; };
+		203A31952BFF4DF000A0910B /* LanScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 203A31942BFF4DF000A0910B /* LanScanner */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +35,10 @@
 		203A31812BFCCB2400A0910B /* GuidesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidesView.swift; sourceTree = "<group>"; };
 		203A31842BFE4F2300A0910B /* ScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModel.swift; sourceTree = "<group>"; };
 		203A31862BFE567700A0910B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		203A31882BFF34DD00A0910B /* DeviceShortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceShortView.swift; sourceTree = "<group>"; };
+		203A318C2BFF3C1F00A0910B /* Device.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Device.xcdatamodel; sourceTree = "<group>"; };
+		203A318E2BFF3CBF00A0910B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		203A31912BFF4AA600A0910B /* SeeAllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				203A31952BFF4DF000A0910B /* LanScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +72,7 @@
 		203A316A2BFCC3B900A0910B /* HiddenCameraDetector */ = {
 			isa = PBXGroup;
 			children = (
+				203A318A2BFF3C0700A0910B /* CoreData */,
 				203A31862BFE567700A0910B /* Info.plist */,
 				203A31832BFE4F0400A0910B /* ViewModels */,
 				203A31792BFCCA6A00A0910B /* Views */,
@@ -83,6 +94,7 @@
 		203A31792BFCCA6A00A0910B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				203A31872BFF34A600A0910B /* Elements */,
 				203A316D2BFCC3B900A0910B /* ContentView.swift */,
 				203A317A2BFCCA7700A0910B /* Tabs */,
 			);
@@ -92,7 +104,7 @@
 		203A317A2BFCCA7700A0910B /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				203A317B2BFCCA8E00A0910B /* ScanView.swift */,
+				203A31902BFF4A9000A0910B /* ScanView */,
 				203A317D2BFCCAA300A0910B /* CameraDetectorView.swift */,
 				203A317F2BFCCAAE00A0910B /* ToolsView.swift */,
 				203A31812BFCCB2400A0910B /* GuidesView.swift */,
@@ -106,6 +118,32 @@
 				203A31842BFE4F2300A0910B /* ScanViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		203A31872BFF34A600A0910B /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				203A31882BFF34DD00A0910B /* DeviceShortView.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
+		203A318A2BFF3C0700A0910B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				203A318B2BFF3C1F00A0910B /* Devices.xcdatamodeld */,
+				203A318E2BFF3CBF00A0910B /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		203A31902BFF4A9000A0910B /* ScanView */ = {
+			isa = PBXGroup;
+			children = (
+				203A317B2BFCCA8E00A0910B /* ScanView.swift */,
+				203A31912BFF4AA600A0910B /* SeeAllView.swift */,
+			);
+			path = ScanView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,6 +162,9 @@
 			dependencies = (
 			);
 			name = HiddenCameraDetector;
+			packageProductDependencies = (
+				203A31942BFF4DF000A0910B /* LanScanner */,
+			);
 			productName = HiddenCameraDetector;
 			productReference = 203A31682BFCC3B900A0910B /* HiddenCameraDetector.app */;
 			productType = "com.apple.product-type.application";
@@ -152,6 +193,9 @@
 				Base,
 			);
 			mainGroup = 203A315F2BFCC3B900A0910B;
+			packageReferences = (
+				203A31932BFF4DF000A0910B /* XCRemoteSwiftPackageReference "lan-scanner" */,
+			);
 			productRefGroup = 203A31692BFCC3B900A0910B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -179,11 +223,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				203A316E2BFCC3B900A0910B /* ContentView.swift in Sources */,
+				203A318D2BFF3C1F00A0910B /* Devices.xcdatamodeld in Sources */,
 				203A317E2BFCCAA300A0910B /* CameraDetectorView.swift in Sources */,
 				203A316C2BFCC3B900A0910B /* HiddenCameraDetectorApp.swift in Sources */,
+				203A31892BFF34DD00A0910B /* DeviceShortView.swift in Sources */,
+				203A31922BFF4AA600A0910B /* SeeAllView.swift in Sources */,
 				203A317C2BFCCA8E00A0910B /* ScanView.swift in Sources */,
 				203A31802BFCCAAE00A0910B /* ToolsView.swift in Sources */,
 				203A31852BFE4F2300A0910B /* ScanViewModel.swift in Sources */,
+				203A318F2BFF3CBF00A0910B /* CoreDataManager.swift in Sources */,
 				203A31822BFCCB2400A0910B /* GuidesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,6 +374,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "\"\"";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "The app needs bluetooth to scan devices";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "The app needs bluetooth to scan devices";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "need it";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -360,6 +409,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "\"\"";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "The app needs bluetooth to scan devices";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "The app needs bluetooth to scan devices";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "need it";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -400,6 +450,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		203A31932BFF4DF000A0910B /* XCRemoteSwiftPackageReference "lan-scanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MaatheusGois/lan-scanner.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		203A31942BFF4DF000A0910B /* LanScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 203A31932BFF4DF000A0910B /* XCRemoteSwiftPackageReference "lan-scanner" */;
+			productName = LanScanner;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		203A318B2BFF3C1F00A0910B /* Devices.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				203A318C2BFF3C1F00A0910B /* Device.xcdatamodel */,
+			);
+			currentVersion = 203A318C2BFF3C1F00A0910B /* Device.xcdatamodel */;
+			path = Devices.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 203A31602BFCC3B900A0910B /* Project object */;
 }
