@@ -13,6 +13,7 @@ struct DeviceDetailView: View {
     @EnvironmentObject var vm: ScanViewModel
     
     var device: Device
+    
     @State var isSuspicious: Bool
     
     var body: some View {

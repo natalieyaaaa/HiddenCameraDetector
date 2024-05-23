@@ -22,6 +22,7 @@
 		203A31922BFF4AA600A0910B /* SeeAllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A31912BFF4AA600A0910B /* SeeAllView.swift */; };
 		203A31952BFF4DF000A0910B /* LanScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 203A31942BFF4DF000A0910B /* LanScanner */; };
 		203A31972BFFA5BA00A0910B /* DeviceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A31962BFFA5BA00A0910B /* DeviceDetailView.swift */; };
+		203A319A2BFFCB7B00A0910B /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A31992BFFCB7B00A0910B /* HistoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		203A318E2BFF3CBF00A0910B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		203A31912BFF4AA600A0910B /* SeeAllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllView.swift; sourceTree = "<group>"; };
 		203A31962BFFA5BA00A0910B /* DeviceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailView.swift; sourceTree = "<group>"; };
+		203A31992BFFCB7B00A0910B /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				203A31912BFF4AA600A0910B /* SeeAllView.swift */,
 				203A31872BFF34A600A0910B /* Elements */,
 				203A31962BFFA5BA00A0910B /* DeviceDetailView.swift */,
+				203A31992BFFCB7B00A0910B /* HistoryView.swift */,
 			);
 			path = ScanView;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				203A318D2BFF3C1F00A0910B /* Devices.xcdatamodeld in Sources */,
 				203A317E2BFCCAA300A0910B /* CameraDetectorView.swift in Sources */,
 				203A316C2BFCC3B900A0910B /* HiddenCameraDetectorApp.swift in Sources */,
+				203A319A2BFFCB7B00A0910B /* HistoryView.swift in Sources */,
 				203A31892BFF34DD00A0910B /* DeviceShortView.swift in Sources */,
 				203A31972BFFA5BA00A0910B /* DeviceDetailView.swift in Sources */,
 				203A31922BFF4AA600A0910B /* SeeAllView.swift in Sources */,

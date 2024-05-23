@@ -89,7 +89,7 @@ struct ScanView: View {
                             VStack(spacing: 8) {
                                 ForEach(vm.devices, id: \.id) {device in
                                     NavigationLink {
-                                        DeviceDetailView(device: device, isSuspicious: $vm.isSus)
+                                        DeviceDetailView(device: device, isSuspicious: device.isSuspicious)
                                             .environmentObject(vm)
                                             .navigationBarBackButtonHidden()
                                     } label: {

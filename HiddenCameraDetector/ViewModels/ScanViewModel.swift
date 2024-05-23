@@ -70,9 +70,13 @@ final class ScanViewModel: ObservableObject {
              
 //MARK: - saving devices
                 for item in self.devicesInfo {
-                    self.coreData.saveEntity(name: item.name, ipAdress: item.ipAdress, id: UUID(), date: item.date, connectionType: item.connectionType, isSuspicious: item.isSuspicious)
-                   
+                    let uuid = UUID()
+                    self.coreData.saveEntity(name: item.name, ipAdress: item.ipAdress, id: uuid, date: item.date, connectionType: item.connectionType, isSuspicious: item.isSuspicious)
+                    let all = self.coreData.allEntities()
+                    let savedEntity = all.first(where: {$0.id == uuid})
+                    self.devices.append(savedEntity!)
                 }
+                
 //MARK: - setting out
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.buttonText = "Start"
