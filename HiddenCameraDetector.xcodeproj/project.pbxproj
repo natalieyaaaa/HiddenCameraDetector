@@ -23,6 +23,9 @@
 		203A31952BFF4DF000A0910B /* LanScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 203A31942BFF4DF000A0910B /* LanScanner */; };
 		203A31972BFFA5BA00A0910B /* DeviceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A31962BFFA5BA00A0910B /* DeviceDetailView.swift */; };
 		203A319A2BFFCB7B00A0910B /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A31992BFFCB7B00A0910B /* HistoryView.swift */; };
+		203A319D2C00B5A300A0910B /* ToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A319C2C00B5A300A0910B /* ToolsViewModel.swift */; };
+		203A31A52C00B7FD00A0910B /* SpeedcheckerReportSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 203A31A42C00B7FD00A0910B /* SpeedcheckerReportSDK */; };
+		203A31A72C00B7FD00A0910B /* SpeedcheckerSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 203A31A62C00B7FD00A0910B /* SpeedcheckerSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +46,7 @@
 		203A31912BFF4AA600A0910B /* SeeAllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllView.swift; sourceTree = "<group>"; };
 		203A31962BFFA5BA00A0910B /* DeviceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailView.swift; sourceTree = "<group>"; };
 		203A31992BFFCB7B00A0910B /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		203A319C2C00B5A300A0910B /* ToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +55,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				203A31952BFF4DF000A0910B /* LanScanner in Frameworks */,
+				203A31A72C00B7FD00A0910B /* SpeedcheckerSDK in Frameworks */,
+				203A31A52C00B7FD00A0910B /* SpeedcheckerReportSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,9 +113,9 @@
 		203A317A2BFCCA7700A0910B /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				203A319B2C00B43F00A0910B /* ToolsView */,
 				203A31902BFF4A9000A0910B /* ScanView */,
 				203A317D2BFCCAA300A0910B /* CameraDetectorView.swift */,
-				203A317F2BFCCAAE00A0910B /* ToolsView.swift */,
 				203A31812BFCCB2400A0910B /* GuidesView.swift */,
 			);
 			path = Tabs;
@@ -119,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				203A31842BFE4F2300A0910B /* ScanViewModel.swift */,
+				203A319C2C00B5A300A0910B /* ToolsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -152,6 +159,14 @@
 			path = ScanView;
 			sourceTree = "<group>";
 		};
+		203A319B2C00B43F00A0910B /* ToolsView */ = {
+			isa = PBXGroup;
+			children = (
+				203A317F2BFCCAAE00A0910B /* ToolsView.swift */,
+			);
+			path = ToolsView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -170,6 +185,8 @@
 			name = HiddenCameraDetector;
 			packageProductDependencies = (
 				203A31942BFF4DF000A0910B /* LanScanner */,
+				203A31A42C00B7FD00A0910B /* SpeedcheckerReportSDK */,
+				203A31A62C00B7FD00A0910B /* SpeedcheckerSDK */,
 			);
 			productName = HiddenCameraDetector;
 			productReference = 203A31682BFCC3B900A0910B /* HiddenCameraDetector.app */;
@@ -201,6 +218,7 @@
 			mainGroup = 203A315F2BFCC3B900A0910B;
 			packageReferences = (
 				203A31932BFF4DF000A0910B /* XCRemoteSwiftPackageReference "lan-scanner" */,
+				203A31A32C00B7FC00A0910B /* XCRemoteSwiftPackageReference "speedchecker-sdk-ios" */,
 			);
 			productRefGroup = 203A31692BFCC3B900A0910B /* Products */;
 			projectDirPath = "";
@@ -238,6 +256,7 @@
 				203A31922BFF4AA600A0910B /* SeeAllView.swift in Sources */,
 				203A317C2BFCCA8E00A0910B /* ScanView.swift in Sources */,
 				203A31802BFCCAAE00A0910B /* ToolsView.swift in Sources */,
+				203A319D2C00B5A300A0910B /* ToolsViewModel.swift in Sources */,
 				203A31852BFE4F2300A0910B /* ScanViewModel.swift in Sources */,
 				203A318F2BFF3CBF00A0910B /* CoreDataManager.swift in Sources */,
 				203A31822BFCCB2400A0910B /* GuidesView.swift in Sources */,
@@ -468,6 +487,14 @@
 				kind = branch;
 			};
 		};
+		203A31A32C00B7FC00A0910B /* XCRemoteSwiftPackageReference "speedchecker-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/speedchecker/speedchecker-sdk-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -475,6 +502,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 203A31932BFF4DF000A0910B /* XCRemoteSwiftPackageReference "lan-scanner" */;
 			productName = LanScanner;
+		};
+		203A31A42C00B7FD00A0910B /* SpeedcheckerReportSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 203A31A32C00B7FC00A0910B /* XCRemoteSwiftPackageReference "speedchecker-sdk-ios" */;
+			productName = SpeedcheckerReportSDK;
+		};
+		203A31A62C00B7FD00A0910B /* SpeedcheckerSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 203A31A32C00B7FC00A0910B /* XCRemoteSwiftPackageReference "speedchecker-sdk-ios" */;
+			productName = SpeedcheckerSDK;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -11,6 +11,7 @@ struct ContentView: View {
     
     @State var selection = 1
     @StateObject var vm = ScanViewModel()
+    @StateObject var tvm = ToolsViewModel()
     
     var body: some View {
         ZStack {
@@ -22,6 +23,7 @@ struct ContentView: View {
                     CameraDetectorView()
                 } else if selection == 3 {
                     ToolsView()
+                        .environmentObject(tvm)
                 } else if selection == 4 {
                     GuidesView()
                 }
