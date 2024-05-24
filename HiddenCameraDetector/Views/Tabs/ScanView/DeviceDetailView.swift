@@ -12,15 +12,12 @@ struct DeviceDetailView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var vm: ScanViewModel
     
-    var device: Device
-    
-    @State var isSuspicious: Bool
-    
+    @ObservedObject var device: Device
+        
     var body: some View {
         VStack {
             HStack {
                 Button {
-                    vm.coreData.updateEntity()
                     dismiss()
                 } label: {
                     Image("arrow.back")
@@ -44,29 +41,24 @@ struct DeviceDetailView: View {
                 DetailPoints(text: "Hostname", value: "Not Available")
             }.padding(.bottom, 24)
             
-            Text(isSuspicious ? "Don't trust" : "Trust")
-                .foregroundStyle(isSuspicious ? .suspiciousRed : .green)
+            Text(device.isSuspicious ? "Don't trust" : "Trust")
+                .foregroundStyle(device.isSuspicious ? .suspiciousRed : .green)
             
             Spacer()
             
             Button {
                 withAnimation {
-
+                    device.isSuspicious.toggle()
                 }
             } label: {
-                Text(isSuspicious ? "Mark as secure" : "Mark as suspicious")
+                Text(device.isSuspicious ? "Mark as secure" : "Mark as suspicious")
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 30)
-                        .foregroundStyle(isSuspicious ? .suspiciousRed : .blue))
+                        .foregroundStyle(device.isSuspicious ? .suspiciousRed : .blue))
             }.padding(.bottom, 70)
-                .onChange(of: isSuspicious) { newValue in
-                    
-                    device.isSuspicious = newValue
-                    
-                }
-            
+
         }.padding(.horizontal)
             .background(Color.black)
 

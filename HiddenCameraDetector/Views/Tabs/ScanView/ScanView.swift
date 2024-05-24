@@ -89,12 +89,12 @@ struct ScanView: View {
                             VStack(spacing: 8) {
                                 ForEach(vm.devices, id: \.id) {device in
                                     NavigationLink {
-                                        DeviceDetailView(device: device, isSuspicious: device.isSuspicious)
+                                        DeviceDetailView(device: device)
                                             .environmentObject(vm)
                                             .navigationBarBackButtonHidden()
                                           
                                     } label: {
-                                        DeviceShortView(isSuspicious: device.isSuspicious, name: device.name!, connectionType: device.connectionType!)
+                                        DeviceShortView(device: device)
                                     }
                                 }
                             }.padding(.horizontal)

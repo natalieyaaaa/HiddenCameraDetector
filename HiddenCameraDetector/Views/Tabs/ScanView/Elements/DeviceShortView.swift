@@ -9,24 +9,22 @@ import SwiftUI
 
 struct DeviceShortView: View {
     
-    var isSuspicious: Bool
-    var name: String
-    var connectionType: String
+    @ObservedObject var device: Device
     
     var body: some View {
         HStack(spacing: 12) {
-            Image(connectionType == "Wi-Fi" ? "wifi" : "bluetooth")
+            Image(device.connectionType == "Wi-Fi" ? "wifi" : "bluetooth")
                 .renderingMode(.template)
-                .foregroundStyle(isSuspicious ? .suspiciousRed : .blue)
+                .foregroundStyle(device.isSuspicious ? .suspiciousRed : .blue)
             
-            Text(name)
+            Text(device.name!)
                 .foregroundStyle(.white)
                 .font(Font.headline.weight(.medium))
                 .multilineTextAlignment(.leading)
             
             Spacer()
             
-            if isSuspicious {
+            if device.isSuspicious {
                 Text("Attention")
                     .foregroundStyle(.red)
                     .font(Font.headline.weight(.medium))
@@ -37,7 +35,7 @@ struct DeviceShortView: View {
         }.padding()
             .background(RoundedRectangle(cornerRadius: 36)
                 .stroke(lineWidth: 1)
-                .foregroundStyle(isSuspicious ? .suspiciousRed : .blue))
+                .foregroundStyle(device.isSuspicious ? .suspiciousRed : .blue))
         
     }
 }

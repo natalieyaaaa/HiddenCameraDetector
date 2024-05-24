@@ -34,11 +34,11 @@ struct SeeAllView: View {
             ScrollView {
                 ForEach(devices, id: \.id) { device in
                     NavigationLink {
-                        DeviceDetailView(device: device, isSuspicious: device.isSuspicious)
+                        DeviceDetailView(device: device)
                             .environmentObject(vm)
                             .navigationBarBackButtonHidden()
                     } label: {
-                        DeviceShortView(isSuspicious: false, name: device.name ?? "No name", connectionType: device.connectionType ?? "Uknown")
+                            DeviceShortView(device: device)
                     }
                 }
             }
