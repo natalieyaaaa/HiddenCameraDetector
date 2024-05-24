@@ -66,7 +66,9 @@ struct ScanView: View {
                         
                         NavigationLink {
                             if vm.devices.isEmpty {
-                                
+                                HistoryView()
+                                    .environmentObject(vm)
+                                    .navigationBarBackButtonHidden()
                             } else {
                                 SeeAllView(devices: $vm.devices)
                                     .navigationBarBackButtonHidden()

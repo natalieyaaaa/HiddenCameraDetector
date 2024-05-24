@@ -63,4 +63,18 @@ class CoreDataManager: ObservableObject {
                 return []
             }
         }
+    
+    func deleteAllEntities() {
+         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Device.fetchRequest()
+         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+         do {
+             try persistentContainer.viewContext.execute(batchDeleteRequest)
+             try persistentContainer.viewContext.save()
+             print("All entities deleted")
+         } catch let error {
+             persistentContainer.viewContext.rollback()
+             print("Error deleting all entities: \(error.localizedDescription)")
+         }
+     }
     }
