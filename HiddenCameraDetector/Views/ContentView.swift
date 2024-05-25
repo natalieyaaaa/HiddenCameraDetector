@@ -98,7 +98,7 @@ struct ContentView: View {
                             
                             Text("Guides")
                                 .font(.caption)
-                        }.foregroundStyle(selection == 2 ? .blue : .white)
+                        }.foregroundStyle(selection == 4 ? .blue : .white)
                     }
                 }.padding(.horizontal, 27)
                     .padding(.top, 12)
