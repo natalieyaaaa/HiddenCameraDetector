@@ -168,11 +168,67 @@ struct ToolsView: View {
             
             if selection == 2 {
                 ZStack {
-                    Image("magnetic")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: isSE ? 200 : 320)
-
+                    Circle()
+                        .trim(from: 0.0, to: 0.73)
+                        .stroke(
+                            style: StrokeStyle(
+                                lineWidth: 25, // Adjust the line width as needed
+                                lineCap: .round
+                            )
+                        )
+                        .foregroundColor(.white)
+                        .rotationEffect(.degrees(-220)) // Start the stroke from the top
+                        .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
+                    
+                    Circle()
+                        .trim(from: 0.0, to: 0.73)
+                        .stroke(
+                            style: StrokeStyle(
+                                lineWidth: 25, // Adjust the line width as needed
+                                lineCap: .round
+                            )
+                        )
+                        .foregroundColor(.red.opacity(0.5))
+                        .rotationEffect(.degrees(-220)) // Start the stroke from the top
+                        .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
+                    
+                    Circle()
+                        .trim(from: 0.0, to: 0.55)
+                        .stroke(
+                            style: StrokeStyle(
+                                lineWidth: 25, // Adjust the line width as needed
+                                lineCap: .round
+                            )
+                        )
+                        .foregroundColor(.red)
+                        .rotationEffect(.degrees(-220)) // Start the stroke from the top
+                        .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
+                    
+                    
+                    Circle()
+                        .trim(from: 0.0, to: 0.36)
+                        .stroke(
+                            style: StrokeStyle(
+                                lineWidth: 25, // Adjust the line width as needed
+                                lineCap: .round
+                            )
+                        )
+                        .foregroundColor(.yellow)
+                        .rotationEffect(.degrees(-220)) // Start the stroke from the top
+                        .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
+                    
+                    Circle()
+                        .trim(from: 0.0, to: 0.18)
+                        .stroke(
+                            style: StrokeStyle(
+                                lineWidth: 25, // Adjust the line width as needed
+                                lineCap: .round
+                            )
+                        )
+                        .foregroundColor(.blue)
+                        .rotationEffect(.degrees(-220)) // Start the stroke from the top
+                        .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
+                    
                     Image("path")
                               .resizable()
                               .aspectRatio(contentMode: .fit)
@@ -182,13 +238,15 @@ struct ToolsView: View {
                               .rotationEffect(Angle(degrees: vm.rotationAngleMagnetic))
                               .animation(.easeInOut(duration: 2), value: vm.rotationAngleMagnetic)
 
-                }.offset(y: -30)
+                }.padding(.top, 0)
                 .padding(.bottom, isSE ? 25 : 50)
+                
                     .onDisappear {
                         withAnimation {
                             vm.stopMagneticTest()
                         }
                     }
+                
                 HStack(spacing: 10) {
                     Text("\(Int(vm.magneticResult))")
                         .foregroundStyle(vm.magneticResult == 0.0 ? .gray : .white)
@@ -219,14 +277,13 @@ struct ToolsView: View {
                         .padding(.vertical)
                         .background(RoundedRectangle(cornerRadius: 30).foregroundStyle(.blue))
                 }.padding()
-                    .offset(y: -12)
+                  
             }
             
-            Spacer()
         }.background(Color.black)
         
 
-            .padding(.bottom, 40)
+            .padding(.bottom, isSE ? 70 : 40)
             
     }
 }
