@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		202537BB2C03622E0069F8BD /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202537BA2C03622E0069F8BD /* CameraManager.swift */; };
 		203A316C2BFCC3B900A0910B /* HiddenCameraDetectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A316B2BFCC3B900A0910B /* HiddenCameraDetectorApp.swift */; };
 		203A316E2BFCC3B900A0910B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A316D2BFCC3B900A0910B /* ContentView.swift */; };
 		203A31702BFCC3BB00A0910B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 203A316F2BFCC3BB00A0910B /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		202537BA2C03622E0069F8BD /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		203A31682BFCC3B900A0910B /* HiddenCameraDetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiddenCameraDetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		203A316B2BFCC3B900A0910B /* HiddenCameraDetectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenCameraDetectorApp.swift; sourceTree = "<group>"; };
 		203A316D2BFCC3B900A0910B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +61,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		202537B92C0362090069F8BD /* CameraDetectorView */ = {
+			isa = PBXGroup;
+			children = (
+				203A317D2BFCCAA300A0910B /* CameraDetectorView.swift */,
+				202537BA2C03622E0069F8BD /* CameraManager.swift */,
+			);
+			path = CameraDetectorView;
+			sourceTree = "<group>";
+		};
 		203A315F2BFCC3B900A0910B = {
 			isa = PBXGroup;
 			children = (
@@ -109,9 +120,9 @@
 		203A317A2BFCCA7700A0910B /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				202537B92C0362090069F8BD /* CameraDetectorView */,
 				203A319B2C00B43F00A0910B /* ToolsView */,
 				203A31902BFF4A9000A0910B /* ScanView */,
-				203A317D2BFCCAA300A0910B /* CameraDetectorView.swift */,
 				203A31812BFCCB2400A0910B /* GuidesView.swift */,
 			);
 			path = Tabs;
@@ -243,6 +254,7 @@
 				203A318D2BFF3C1F00A0910B /* Devices.xcdatamodeld in Sources */,
 				203A317E2BFCCAA300A0910B /* CameraDetectorView.swift in Sources */,
 				203A316C2BFCC3B900A0910B /* HiddenCameraDetectorApp.swift in Sources */,
+				202537BB2C03622E0069F8BD /* CameraManager.swift in Sources */,
 				203A319A2BFFCB7B00A0910B /* HistoryView.swift in Sources */,
 				203A31892BFF34DD00A0910B /* DeviceShortView.swift in Sources */,
 				203A31972BFFA5BA00A0910B /* DeviceDetailView.swift in Sources */,
@@ -394,6 +406,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "\"\"";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "The app needs bluetooth to scan devices";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "The app needs bluetooth to scan devices";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs acces to camera to work";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "need it";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -429,6 +442,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "\"\"";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "The app needs bluetooth to scan devices";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "The app needs bluetooth to scan devices";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs acces to camera to work";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "need it";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
