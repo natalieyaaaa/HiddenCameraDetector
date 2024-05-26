@@ -11,9 +11,9 @@ struct ToolsView: View {
     
     @EnvironmentObject var vm: ToolsViewModel
     @State var selection = 1
-    
+
     @State private var offsetX: CGFloat = 0.0
-    @State private var progress: CGFloat = 0.73
+    
     var body: some View {
         VStack {
             
@@ -98,7 +98,7 @@ struct ToolsView: View {
                           .frame(width: 250, height: 250)
                 
                 Circle()
-                    .trim(from: 0.0, to: progress)
+                    .trim(from: 0.0, to: vm.progress)
                                   .stroke(
                                       style: StrokeStyle(
                                           lineWidth: 25,
@@ -108,24 +108,72 @@ struct ToolsView: View {
                                   .foregroundColor(.blue)
                                   .rotationEffect(.degrees(-220))
                                   .frame(width: 250, height: 250)
-                                  .animation(.easeInOut(duration: 2.0), value: progress)
+                                  .animation(.easeInOut(duration: 2.0), value: vm.progress)
                 
                 Image("numbers")
                     .offset(y: -15)
-            }
+                
+                Image("path") // Replace this with your arrow image
+                    .offset(y: -30)
+                    .rotationEffect(Angle(degrees: vm.rotationAngle))
+                    .animation(.easeInOut(duration: 1), value: vm.rotationAngle)
+                
+            }.padding(.bottom, 64)
             
+            HStack(spacing: 28) {
+                SpeedOption(image: "download", text: "Download", value: $vm.downloadSpeedResult)
+                SpeedOption(image: "upload", text: "Upload", value: $vm.uploadSpeedResult)
+            }
             
             Spacer()
         }.background(Color.black)
+        
             .onAppear {
-                let timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                    vm.downloadSpeedTest()
-                    progress = vm.downloadSpeed >= 1000.0 ? 0.73 : Double(vm.downloadSpeed / 1375 )
-                    
+                withAnimation {
+                    vm.startTest()
                 }
+                       }
+            .onDisappear {
+                vm.stopTest()
+                vm.downloadSpeedResult = 0.0
+                vm.uploadSpeedResult = 0.0
+                vm.progress = 0.1
             }
+            
     }
 }
 #Preview {
     ToolsView()
+}
+
+
+struct SpeedOption: View {
+    var image: String
+    var text: String
+    
+    @Binding var value: Double
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            HStack(spacing: 16) {
+                Image(image)
+                Text(text)
+                    .foregroundStyle(.white)
+                    .font(Font.title3.weight(.medium))
+            }
+            
+            HStack {
+                Text(String(format: "%.1f", value))
+                    .font(Font.title.weight(.semibold))
+                    .foregroundStyle(.white)
+                    .frame(width: 90, alignment: .leading)
+
+                Text("Mbps")
+                    .foregroundStyle(.white)
+            }
+        }.padding()
+            .background(RoundedRectangle(cornerRadius: 24)
+                .foregroundStyle(.tabbarBlack)
+                .frame(width: 180))
+    }
 }
