@@ -82,7 +82,7 @@ struct ToolsView: View {
                     }
                 }
                 
-            }.padding(.bottom, 60)
+            }.padding(.bottom, isSE ? 30 : 60)
             
             ZStack {
                 Circle()
@@ -95,7 +95,7 @@ struct ToolsView: View {
                           )
                           .foregroundColor(.white)
                           .rotationEffect(.degrees(-220)) // Start the stroke from the top
-                          .frame(width: 250, height: 250)
+                          .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
                 
                 Circle()
                     .trim(from: 0.0, to: vm.progress)
@@ -107,23 +107,47 @@ struct ToolsView: View {
                                   )
                                   .foregroundColor(.blue)
                                   .rotationEffect(.degrees(-220))
-                                  .frame(width: 250, height: 250)
+                                  .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
                                   .animation(.easeInOut(duration: 2.0), value: vm.progress)
                 
                 Image("numbers")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .offset(y: -15)
+                    .frame(width: isSE ? 155 : 200, height: isSE ? 155 : 200)
                 
                 Image("path") // Replace this with your arrow image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: isSE ? 50 : 90, height: isSE ? 50 : 90)
                     .offset(y: -30)
+                    .rotationEffect(Angle(degrees: -135))
                     .rotationEffect(Angle(degrees: vm.rotationAngle))
-                    .animation(.easeInOut(duration: 1), value: vm.rotationAngle)
+                    .animation(.easeInOut(duration: 2), value: vm.rotationAngle)
                 
-            }.padding(.bottom, 64)
+            }.padding(.bottom, isSE ? 16 : 48)
             
-            HStack(spacing: 28) {
+            HStack(spacing: 18) {
                 SpeedOption(image: "download", text: "Download", value: $vm.downloadSpeedResult)
                 SpeedOption(image: "upload", text: "Upload", value: $vm.uploadSpeedResult)
             }
+            
+            Button {
+                withAnimation {
+                    if vm.downloadSpeedResult == 0.0 {
+                        vm.startTest()
+                    } else {
+                        vm.stopTest()
+                    }
+                }
+            } label: {
+                Text(vm.timer == nil ? "Start" : "Stop")
+                    .foregroundStyle(.white)
+                    .font(Font.title3.weight(.medium))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical)
+                    .background(RoundedRectangle(cornerRadius: 30).foregroundStyle(.blue))
+            }.padding()
             
             Spacer()
         }.background(Color.black)
@@ -133,12 +157,12 @@ struct ToolsView: View {
                     vm.startTest()
                 }
                        }
-            .onDisappear {
-                vm.stopTest()
-                vm.downloadSpeedResult = 0.0
-                vm.uploadSpeedResult = 0.0
-                vm.progress = 0.1
+            .onChange(of: selection) { newValue in
+                if newValue != 3 {
+                    vm.stopTest()
+                }
             }
+            .padding(.bottom, 60)
             
     }
 }
@@ -154,7 +178,7 @@ struct SpeedOption: View {
     @Binding var value: Double
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: isSE ? 16 : 24) {
             HStack(spacing: 16) {
                 Image(image)
                 Text(text)
@@ -164,9 +188,9 @@ struct SpeedOption: View {
             
             HStack {
                 Text(String(format: "%.1f", value))
-                    .font(Font.title.weight(.semibold))
+                    .font( isSE ? Font.title3.weight(.semibold) : Font.title.weight(.semibold))
                     .foregroundStyle(.white)
-                    .frame(width: 90, alignment: .leading)
+                    .frame(width: isSE ? 70 : 100, alignment: .leading)
 
                 Text("Mbps")
                     .foregroundStyle(.white)
@@ -174,6 +198,6 @@ struct SpeedOption: View {
         }.padding()
             .background(RoundedRectangle(cornerRadius: 24)
                 .foregroundStyle(.tabbarBlack)
-                .frame(width: 180))
+                .frame(width: isSE ? 160 : 190))
     }
 }

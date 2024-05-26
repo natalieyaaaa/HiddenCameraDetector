@@ -15,10 +15,11 @@ class ToolsViewModel: ObservableObject {
     @Published var downloadSpeedResult: Double = 0.0
     @Published var timer: Timer? = nil
     @Published var progress: CGFloat = 0.01
-    @Published var rotationAngle: Double = -135
+    @Published var rotationAngle: Double =  0.0
 
 
     func startTest() {
+        stopTest()
         test()
         timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { _ in
             self.test()
@@ -27,7 +28,13 @@ class ToolsViewModel: ObservableObject {
     
     func stopTest() {
         timer?.invalidate()
-        timer = nil
+              timer = nil
+              DispatchQueue.main.async {
+                  self.downloadSpeedResult = 0.0
+                  self.uploadSpeedResult = 0.0
+                  self.progress = 0.01
+                  self.rotationAngle = 0.0
+              }
     }
     
     func test() {
@@ -48,11 +55,7 @@ class ToolsViewModel: ObservableObject {
             else if approximateResult >= 1000 { self.progress =  CGFloat(0.73)}
 
             
-            if self.progress < 0.36 {
-                self.rotationAngle = -(self.progress * 5 / 0.01)
-            } else {
-                self.rotationAngle = self.progress * 5 / 0.01
-            }
+            self.rotationAngle = self.progress * 270 / 0.73
         }
     }
 
