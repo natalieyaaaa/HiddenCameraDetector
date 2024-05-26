@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+import CoreMotion
 
 class ToolsViewModel: ObservableObject {
     
@@ -15,29 +15,61 @@ class ToolsViewModel: ObservableObject {
     @Published var downloadSpeedResult: Double = 0.0
     @Published var timer: Timer? = nil
     @Published var progress: CGFloat = 0.01
-    @Published var rotationAngle: Double =  0.0
+    @Published var rotationAngleSpeed: Double =  0.0
+    @Published var rotationAngleMagnetic: Double =  0.0
+    @Published var magneticResult: Double =  0.0
 
+    let magnetic = MagnetometerManager()
+    
+    func startMagneticTest() {
+        stopMagneticTest()
+        magneticTest()
+        
+    }
+    
+    func stopMagneticTest() {
+        magnetic.stopMagnetometerUpdates()
+        rotationAngleMagnetic = 0.0
+        magneticResult = 0.0
+    }
+    
+    func magneticTest() {
+        magnetic.startMagnetometerUpdates { magneticField in
+            let magneticFieldStrength = sqrt(pow(magneticField.field.x, 2) +
+                                             pow(magneticField.field.y, 2) +
+                                             pow(magneticField.field.z, 2))
+            
+            self.magneticResult = magneticFieldStrength  // Переведення в мікротесли (μT)
+            self.rotationAngleMagnetic = self.magneticResult * 270 / 1000
+     }
+    }
 
-    func startTest() {
-        stopTest()
-        test()
+    func startSpeedTest() {
+        DispatchQueue.main.async {
+            self.downloadSpeedResult = 0.0
+            self.uploadSpeedResult = 0.0
+            self.progress = 0.01
+            self.rotationAngleSpeed = 0.0
+        }
+        stopSpeedTest()
+        speedTest()
         timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { _ in
-            self.test()
+            self.speedTest()
         }
     }
     
-    func stopTest() {
+    func stopSpeedTest() {
         timer?.invalidate()
               timer = nil
               DispatchQueue.main.async {
                   self.downloadSpeedResult = 0.0
                   self.uploadSpeedResult = 0.0
                   self.progress = 0.01
-                  self.rotationAngle = 0.0
+                  self.rotationAngleSpeed = 0.0
               }
     }
     
-    func test() {
+    func speedTest() {
         self.downloadSpeedTest()
         self.uploadSpeedTest()
         DispatchQueue.main.async {
@@ -50,12 +82,12 @@ class ToolsViewModel: ObservableObject {
             else if approximateResult <= 100 { self.progress =  CGFloat(0.27 + (approximateResult - 50) * 0.09 / 50)}
             else if approximateResult <= 250 { self.progress =  CGFloat(0.36 + (approximateResult - 150) * 0.09 / 150)}
             else if approximateResult <= 500 { self.progress =  CGFloat(0.45 + (approximateResult - 250) * 0.09 / 250)}
-            else if approximateResult < 750 { self.progress =  CGFloat(0.55 + (approximateResult - 250) * 0.09 / 250)}
-            else if approximateResult < 1000 { self.progress =  CGFloat(0.64 + (approximateResult - 250) * 0.09 / 250)}
+            else if approximateResult <= 750 { self.progress =  CGFloat(0.55 + (approximateResult - 250) * 0.09 / 250)}
+            else if approximateResult <= 1000 { self.progress =  CGFloat(0.64 + (approximateResult - 250) * 0.09 / 250)}
             else if approximateResult >= 1000 { self.progress =  CGFloat(0.73)}
 
             
-            self.rotationAngle = self.progress * 270 / 0.73
+            self.rotationAngleSpeed = self.progress * 270 / 0.73
         }
     }
 
@@ -114,5 +146,36 @@ class ToolsViewModel: ObservableObject {
     }
 }
         
+class MagnetometerManager {
+    private let motionManager = CMMotionManager()
+    private let queue = OperationQueue()
+    
+    func startMagnetometerUpdates(completion: @escaping (_ magneticField: CMCalibratedMagneticField) -> Void) {
+        guard motionManager.isMagnetometerAvailable else {
+            print("Магнітометр недоступний на цьому пристрої")
+            return
+        }
+        
+        motionManager.magnetometerUpdateInterval = 1.0 / 60.0  // Частота оновлення в секундах
+        
+        motionManager.startMagnetometerUpdates(to: queue) { (data, error) in
+            if let error = error {
+                print("Помилка при отриманні даних магнітометра: \(error.localizedDescription)")
+                return
+            }
+            
+            if let magneticField = data?.magneticField {
+                let calibratedField = CMCalibratedMagneticField(field: magneticField, accuracy: .uncalibrated)
+                DispatchQueue.main.async {
+                    completion(calibratedField)
+                }
+            }
+        }
+    }
+    
+    func stopMagnetometerUpdates() {
+        motionManager.stopMagnetometerUpdates()
+    }
+}
     
 

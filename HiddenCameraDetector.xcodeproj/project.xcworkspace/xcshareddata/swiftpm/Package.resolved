@@ -8,15 +8,6 @@
         "branch" : "develop",
         "revision" : "b5d4cda7161efec0fa042670eaa9bb7aeeba5bee"
       }
-    },
-    {
-      "identity" : "speedchecker-sdk-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/speedchecker/speedchecker-sdk-ios.git",
-      "state" : {
-        "revision" : "b84f71781d2badf8e2825a8bdfa20b8ad855efb4",
-        "version" : "2.0.3"
-      }
     }
   ],
   "version" : 2

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "magnetic.info.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
