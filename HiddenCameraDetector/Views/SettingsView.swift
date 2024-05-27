@@ -43,11 +43,9 @@ struct SettingsView: View {
             }.padding(.bottom, 24)
             
             VStack {
-                Button {
-                    
-                } label: {
+                Link(destination: URL(string: "mailto:koksalozturk52@outlook.com")!,label: {
                     SettinsOption(image: "share", text: "Share App")
-                }
+                })
                 
                 Button {
                     
@@ -59,16 +57,13 @@ struct SettingsView: View {
                 } label: {
                     SettinsOption(image: "contact", text: "Contact Us")
                 }
-                Button {
-                    
-                } label: {
+                Link(destination: URL(string: "https://sites.google.com/view/koksalozturk/terms-of-use")!, label: {
                     SettinsOption(image: "terms", text: "Terms of Use")
-                }
-                Button {
-                    
-                } label: {
+                })
+                
+                Link(destination: URL(string: "https://sites.google.com/view/koksalozturk/privacy-policy")!, label: {
                     SettinsOption(image: "privacy", text: "Privacy Policy")
-                }
+                })
                 
             }
             
