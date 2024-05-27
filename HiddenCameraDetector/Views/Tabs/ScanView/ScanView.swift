@@ -25,7 +25,8 @@ struct ScanView: View {
                             .padding(.trailing, isSE ? 110 : 120)
                         
                         NavigationLink {
-                            
+                            SettingsView()
+                                .navigationBarBackButtonHidden()
                         } label: {
                             Image("settings")
                                 .resizable()

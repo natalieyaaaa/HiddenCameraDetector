@@ -26,6 +26,7 @@
 		203A319A2BFFCB7B00A0910B /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A31992BFFCB7B00A0910B /* HistoryView.swift */; };
 		203A319D2C00B5A300A0910B /* ToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A319C2C00B5A300A0910B /* ToolsViewModel.swift */; };
 		205045992C04A5C200AC5075 /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205045982C04A5C200AC5075 /* InformationView.swift */; };
+		206E31942C04DBAC0035D05B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206E31932C04DBAC0035D05B /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		203A31992BFFCB7B00A0910B /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		203A319C2C00B5A300A0910B /* ToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsViewModel.swift; sourceTree = "<group>"; };
 		205045982C04A5C200AC5075 /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
+		206E31932C04DBAC0035D05B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +117,9 @@
 			isa = PBXGroup;
 			children = (
 				203A316D2BFCC3B900A0910B /* ContentView.swift */,
+				203A31812BFCCB2400A0910B /* GuidesView.swift */,
 				203A317A2BFCCA7700A0910B /* Tabs */,
+				206E31932C04DBAC0035D05B /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -126,7 +130,6 @@
 				202537B92C0362090069F8BD /* CameraDetectorView */,
 				203A319B2C00B43F00A0910B /* ToolsView */,
 				203A31902BFF4A9000A0910B /* ScanView */,
-				203A31812BFCCB2400A0910B /* GuidesView.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				203A318D2BFF3C1F00A0910B /* Devices.xcdatamodeld in Sources */,
 				203A317E2BFCCAA300A0910B /* CameraDetectorView.swift in Sources */,
 				203A316C2BFCC3B900A0910B /* HiddenCameraDetectorApp.swift in Sources */,
+				206E31942C04DBAC0035D05B /* SettingsView.swift in Sources */,
 				202537BB2C03622E0069F8BD /* CameraManager.swift in Sources */,
 				203A319A2BFFCB7B00A0910B /* HistoryView.swift in Sources */,
 				203A31892BFF34DD00A0910B /* DeviceShortView.swift in Sources */,

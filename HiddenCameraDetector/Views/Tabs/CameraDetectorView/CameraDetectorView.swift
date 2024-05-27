@@ -38,7 +38,8 @@ struct CameraDetectorView: View {
                     
                     Spacer()
                     NavigationLink {
-                        
+                        SettingsView()
+                        .navigationBarBackButtonHidden()
                     } label: {
                         Image("settings")
                     }
