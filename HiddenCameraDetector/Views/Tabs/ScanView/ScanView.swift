@@ -64,19 +64,25 @@ struct ScanView: View {
                         
                         Spacer()
                         
-                        NavigationLink {
                             if vm.devices.isEmpty {
-                                HistoryView()
-                                    .environmentObject(vm)
-                                    .navigationBarBackButtonHidden()
+                                NavigationLink {
+                                    HistoryView()
+                                        .environmentObject(vm)
+                                        .navigationBarBackButtonHidden()
+                                } label: {
+                                    Text("History")
+                                        .foregroundStyle(.blue)
+                                }
+                                
                             } else {
-                                SeeAllView(devices: $vm.devices)
-                                    .navigationBarBackButtonHidden()
+                                NavigationLink {
+                                    SeeAllView(devices: $vm.devices)
+                                        .navigationBarBackButtonHidden()
+                                } label: {
+                                    Text(vm.devices.isEmpty ? "History" : "See all")
+                                        .foregroundStyle(.blue)
+                                }
                             }
-                        } label: {
-                            Text(vm.devices.isEmpty ? "History" : "See all")
-                                .foregroundStyle(.blue)
-                        }
                     }.padding(.horizontal, 32)
                         .padding(.bottom, 8)
                     

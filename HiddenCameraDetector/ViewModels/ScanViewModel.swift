@@ -10,6 +10,7 @@ import CoreBluetooth
 import SystemConfiguration.CaptiveNetwork
 import Network
 import LanScanner
+import SwiftUI
 
 struct DeviceInfo {
     var name: String
@@ -27,6 +28,8 @@ final class ScanViewModel: ObservableObject {
     @Published var devicesInfo: [DeviceInfo] = []
     @Published var devices: [Device] = []
     
+    @Published var bluetoothOffAlert = false
+    
     let bluetoothManager = BluetoothManager()
     let lanScanner = CountViewModel()
     let coreData = CoreDataManager.shared
@@ -40,6 +43,13 @@ final class ScanViewModel: ObservableObject {
         bluetoothManager.peripherals.removeAll()
         lanScanner.connectedDevices.removeAll()
         isScanning = true
+        
+//MARK: - checking the availability
+        
+        if bluetoothManager.bluetoothOff == true {
+            bluetoothOffAlert = true
+            return
+        }
         
 //MARK: - scanning
         bluetoothManager.centralManager.scanForPeripherals(withServices: nil, options: nil)
@@ -78,9 +88,10 @@ final class ScanViewModel: ObservableObject {
                 
 //MARK: - setting out
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.buttonText = "Start"
-                    self.isScanning = false
-                    
+                    withAnimation {
+                        self.buttonText = "Start"
+                        self.isScanning = false
+                    }
                 }
             }
         }
@@ -92,7 +103,6 @@ final class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelega
     
     @Published var peripherals: [DeviceInfo] = []
     @Published var bluetoothOff = false
-    
     
     override init() {
         super.init()

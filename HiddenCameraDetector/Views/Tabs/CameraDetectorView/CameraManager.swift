@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import AVFoundation
 
+
 struct CameraView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> CameraViewController {
         let cameraViewController = CameraViewController()
@@ -22,14 +23,11 @@ struct CameraView: UIViewControllerRepresentable {
 
 class CameraViewController: UIViewController {
     var captureSession: AVCaptureSession?
-      var filterColor: UIColor = .red // Default filter color is red
 
-      override func viewDidLoad() {
-          super.viewDidLoad()
-          setupCamera()
-          addFilterOverlay(color: filterColor)
-      }
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCamera()
+    }
 
     private func setupCamera() {
         captureSession = AVCaptureSession()
@@ -54,18 +52,5 @@ class CameraViewController: UIViewController {
         view.layer.addSublayer(previewLayer)
 
         captureSession?.startRunning()
-    }
-    
-    private func addFilterOverlay(color: UIColor) {
-        let filterView = UIView(frame: view.bounds)
-        filterView.backgroundColor = color.withAlphaComponent(0.5)
-        filterView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(filterView)
-    }
-
-    func updateFilter(color: UIColor) {
-        filterColor = color
-        view.subviews.last?.removeFromSuperview() // Remove previous filter
-        addFilterOverlay(color: filterColor)
     }
 }

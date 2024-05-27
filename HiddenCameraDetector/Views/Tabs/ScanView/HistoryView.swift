@@ -51,12 +51,12 @@ struct HistoryView: View {
                             }
                         } label: {
                             HistoryDeviceView(device: device)
-                        }
+                        }.padding(.horizontal)
                     }
                 }
             }
             
-        }.padding(.horizontal)
+        }
             .background(Color.black)
             .onAppear {
                 allEntities = vm.coreData.allEntities()

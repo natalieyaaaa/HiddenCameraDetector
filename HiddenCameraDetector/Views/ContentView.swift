@@ -102,11 +102,11 @@ struct ContentView: View {
                     }
                 }.padding(.horizontal, 27)
                     .padding(.top, 12)
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 50)
                     .background(Color.tabbarBlack)
                         .cornerRadius(46)
                         .shadow(color: Color(red: 0.93, green: 0.97, blue: 1).opacity(0.15), radius: 15, x: 0, y: -4)
-                    .offset(y: isSE ? 25 : 50)
+                    .offset(y: isSE ? 45 : 50)
                 
             }.zIndex(2)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
