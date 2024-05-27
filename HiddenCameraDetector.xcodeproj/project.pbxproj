@@ -25,6 +25,7 @@
 		203A31972BFFA5BA00A0910B /* DeviceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A31962BFFA5BA00A0910B /* DeviceDetailView.swift */; };
 		203A319A2BFFCB7B00A0910B /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A31992BFFCB7B00A0910B /* HistoryView.swift */; };
 		203A319D2C00B5A300A0910B /* ToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A319C2C00B5A300A0910B /* ToolsViewModel.swift */; };
+		205045992C04A5C200AC5075 /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205045982C04A5C200AC5075 /* InformationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		203A31962BFFA5BA00A0910B /* DeviceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailView.swift; sourceTree = "<group>"; };
 		203A31992BFFCB7B00A0910B /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		203A319C2C00B5A300A0910B /* ToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsViewModel.swift; sourceTree = "<group>"; };
+		205045982C04A5C200AC5075 /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 			children = (
 				203A317D2BFCCAA300A0910B /* CameraDetectorView.swift */,
 				202537BA2C03622E0069F8BD /* CameraManager.swift */,
+				205045982C04A5C200AC5075 /* InformationView.swift */,
 			);
 			path = CameraDetectorView;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				203A316E2BFCC3B900A0910B /* ContentView.swift in Sources */,
+				205045992C04A5C200AC5075 /* InformationView.swift in Sources */,
 				203A318D2BFF3C1F00A0910B /* Devices.xcdatamodeld in Sources */,
 				203A317E2BFCCAA300A0910B /* CameraDetectorView.swift in Sources */,
 				203A316C2BFCC3B900A0910B /* HiddenCameraDetectorApp.swift in Sources */,

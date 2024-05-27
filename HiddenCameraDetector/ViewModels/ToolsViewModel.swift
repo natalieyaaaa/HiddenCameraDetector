@@ -47,8 +47,8 @@ class ToolsViewModel: ObservableObject {
 
     func startSpeedTest() {
         DispatchQueue.main.async {
-            self.downloadSpeedResult = 0.0
-            self.uploadSpeedResult = 0.0
+            self.downloadSpeedResult = 0.01
+            self.uploadSpeedResult = 0.01
             self.progress = 0.01
             self.rotationAngleSpeed = 0.0
         }
@@ -74,17 +74,10 @@ class ToolsViewModel: ObservableObject {
         self.downloadSpeedTest()
         self.uploadSpeedTest()
         
-        if uploadSpeedResult == 0.00 || downloadSpeedResult == 0.00 {
-            stopSpeedTest()
-            checkAlert = true
-            return
-        }
         
         DispatchQueue.main.async {
             let approximateResult = (self.uploadSpeedResult + self.downloadSpeedResult) / 2
             
-            
-
             if approximateResult <= 10 { self.progress = CGFloat(approximateResult * 0.18 / 10)}
             else if approximateResult <= 50 { self.progress =  CGFloat(0.18 + ((approximateResult - 10) * 0.09 / 40))}
             else if approximateResult <= 100 { self.progress =  CGFloat(0.27 + (approximateResult - 50) * 0.09 / 50)}
@@ -125,6 +118,7 @@ class ToolsViewModel: ObservableObject {
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard error == nil, let response = response as? HTTPURLResponse else {
                 print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                self.checkAlert = true
                 completion(0.0) // Return -1 if there is an error
                 return
             }
