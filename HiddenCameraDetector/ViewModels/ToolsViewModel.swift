@@ -11,13 +11,14 @@ import CoreMotion
 
 class ToolsViewModel: ObservableObject {
     
-    @Published var uploadSpeedResult: Double = 0.0
-    @Published var downloadSpeedResult: Double = 0.0
+    @Published var uploadSpeedResult: Double = 0.1
+    @Published var downloadSpeedResult: Double = 0.1
     @Published var timer: Timer? = nil
     @Published var progress: CGFloat = 0.01
     @Published var rotationAngleSpeed: Double =  0.0
     @Published var rotationAngleMagnetic: Double =  0.0
     @Published var magneticResult: Double =  0.0
+    @Published var checkAlert = false
 
     let magnetic = MagnetometerManager()
     
@@ -72,6 +73,13 @@ class ToolsViewModel: ObservableObject {
     func speedTest() {
         self.downloadSpeedTest()
         self.uploadSpeedTest()
+        
+        if uploadSpeedResult == 0.00 || downloadSpeedResult == 0.00 {
+            stopSpeedTest()
+            checkAlert = true
+            return
+        }
+        
         DispatchQueue.main.async {
             let approximateResult = (self.uploadSpeedResult + self.downloadSpeedResult) / 2
             
@@ -117,7 +125,7 @@ class ToolsViewModel: ObservableObject {
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard error == nil, let response = response as? HTTPURLResponse else {
                 print("Error: \(error?.localizedDescription ?? "Unknown error")")
-                completion(-1.0) // Return -1 if there is an error
+                completion(0.0) // Return -1 if there is an error
                 return
             }
             

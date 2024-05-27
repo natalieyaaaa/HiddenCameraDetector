@@ -28,9 +28,9 @@ final class ScanViewModel: ObservableObject {
     @Published var devicesInfo: [DeviceInfo] = []
     @Published var devices: [Device] = []
     
-    @Published var bluetoothOffAlert = false
+    @Published var checkAlert = false
     
-    let bluetoothManager = BluetoothManager()
+    var bluetoothManager = BluetoothManager()
     let lanScanner = CountViewModel()
     let coreData = CoreDataManager.shared
     
@@ -44,15 +44,10 @@ final class ScanViewModel: ObservableObject {
         lanScanner.connectedDevices.removeAll()
         isScanning = true
         
-//MARK: - checking the availability
-        
-        if bluetoothManager.bluetoothOff == true {
-            bluetoothOffAlert = true
-            return
-        }
-        
 //MARK: - scanning
+        
         bluetoothManager.centralManager.scanForPeripherals(withServices: nil, options: nil)
+            
         lanScanner.scanner.start()
         
         Timer.scheduledTimer(withTimeInterval: 0.07, repeats: true) { timer in
@@ -64,18 +59,20 @@ final class ScanViewModel: ObservableObject {
 //MARK: - stopping scanning
             if intText >= 100 {
                 timer.invalidate()
-                guard !self.bluetoothManager.peripherals.isEmpty else {return}
+                guard !self.bluetoothManager.peripherals.isEmpty else {stopScanning(); return}
                 for device in self.bluetoothManager.peripherals {
                     self.devicesInfo.append(device)
                 }
                 
-                guard !self.lanScanner.connectedDevices.isEmpty else {return}
+                guard !self.lanScanner.connectedDevices.isEmpty else {stopScanning(); return}
                 for device in self.lanScanner.connectedDevices {
                     self.devicesInfo.append(DeviceInfo(name: device.name, connectionType: "Wi-Fi", ipAdress: device.ipAddress, id: device.id, date: formatDateToString(date: .now), isSuspicious: device.id.uuidString.contains("123")))
                 }
                 
                 self.bluetoothManager.centralManager.stopScan()
                 self.lanScanner.scanner.stop()
+                
+ 
              
 //MARK: - saving devices
                 for item in self.devicesInfo {
@@ -95,7 +92,22 @@ final class ScanViewModel: ObservableObject {
                 }
             }
         }
+        
+        func stopScanning() {
+            self.bluetoothManager.centralManager.stopScan()
+            self.lanScanner.scanner.stop()
+            self.checkAlert = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                withAnimation {
+                    self.buttonText = "Start"
+                    self.isScanning = false
+                }
+            }
+        }
     }
+    
+    
+
 }
 
 final class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
@@ -103,6 +115,7 @@ final class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelega
     
     @Published var peripherals: [DeviceInfo] = []
     @Published var bluetoothOff = false
+
     
     override init() {
         super.init()

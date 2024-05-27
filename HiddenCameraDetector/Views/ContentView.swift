@@ -12,6 +12,7 @@ struct ContentView: View {
     @State var selection = 1
     @StateObject var vm = ScanViewModel()
     @StateObject var tvm = ToolsViewModel()
+    @StateObject var cvm = CameraViewModel()
     
     var body: some View {
         ZStack {
@@ -21,6 +22,7 @@ struct ContentView: View {
                         .environmentObject(vm)
                 } else if selection == 2 {
                     CameraDetectorView()
+                        .environmentObject(cvm)
                 } else if selection == 3 {
                     ToolsView()
                         .environmentObject(tvm)
@@ -106,7 +108,7 @@ struct ContentView: View {
                     .background(Color.tabbarBlack)
                         .cornerRadius(46)
                         .shadow(color: Color(red: 0.93, green: 0.97, blue: 1).opacity(0.15), radius: 15, x: 0, y: -4)
-                    .offset(y: isSE ? 45 : 50)
+                    .offset(y: isSE ? 45 : 55)
                 
             }.zIndex(2)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

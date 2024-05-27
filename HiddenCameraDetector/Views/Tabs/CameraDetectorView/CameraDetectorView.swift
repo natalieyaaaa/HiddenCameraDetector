@@ -13,9 +13,11 @@ struct CameraDetectorView: View {
     @State var opacity: Double = 1
     @State var hasTapped = false
     
+    @EnvironmentObject var vm: CameraViewModel
+    
     var body: some View {
         ZStack {
-            CameraView()
+            CameraView(viewModel: vm)
                 .ignoresSafeArea()
             
             Rectangle()
@@ -117,7 +119,7 @@ struct CameraDetectorView: View {
                     .padding(.horizontal, 24)
                     .padding(.vertical, 8)
                     .background(Color.blue.cornerRadius(16))
-                    .padding(.bottom, isSE ? 90 : 60)
+                    .padding(.bottom, isSE ? 90 : 70)
 
             }
         }.onTapGesture {
@@ -127,6 +129,8 @@ struct CameraDetectorView: View {
                     hasTapped = true
                 }
             }
+        }.alert(isPresented: $vm.showAlert) {
+            Alert(title: Text("Could not access camera"), message: Text("Please reload the app and try again"))
         }
     }
 }

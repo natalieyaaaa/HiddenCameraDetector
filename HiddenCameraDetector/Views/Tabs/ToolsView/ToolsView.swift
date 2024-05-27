@@ -11,7 +11,7 @@ struct ToolsView: View {
     
     @EnvironmentObject var vm: ToolsViewModel
     @State var selection = 1
-
+    
     @State private var offsetX: CGFloat = 0.0
     
     var body: some View {
@@ -46,44 +46,44 @@ struct ToolsView: View {
                 .padding(.bottom)
             
             
-                ZStack {
-                    ZStack(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 30)
-                            .foregroundStyle(.tabbarBlack)
-                            .frame(width: 285, height: 44)
-                        
-                        RoundedRectangle(cornerRadius: 30)
-                            .foregroundStyle(.blue)
-                            .frame(width: 150, height: 44)
-                            .offset(x: offsetX, y: 0)
-                            .animation(.easeInOut(duration: 0.5), value: offsetX)
-                    }
-                    HStack(spacing: 45) {
-                        Button {
-                            withAnimation {
-                                selection = 1
-                                offsetX = 0
-                            }
-                        } label: {
-                            Text("Speed Test")
-                                .foregroundStyle(.white)
-                                .font(Font.title3.weight(.medium))
+            ZStack {
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 30)
+                        .foregroundStyle(.tabbarBlack)
+                        .frame(width: 285, height: 44)
+                    
+                    RoundedRectangle(cornerRadius: 30)
+                        .foregroundStyle(.blue)
+                        .frame(width: 150, height: 44)
+                        .offset(x: offsetX, y: 0)
+                        .animation(.easeInOut(duration: 0.5), value: offsetX)
+                }
+                HStack(spacing: 45) {
+                    Button {
+                        withAnimation {
+                            selection = 1
+                            offsetX = 0
                         }
-                        
-                        Button {
-                            withAnimation {
-                                selection = 2
-                                offsetX = 135
-                            }
-                        } label: {
-                            Text("Magnetic")
-                                .foregroundStyle(.white)
-                                .font(Font.title3.weight(.medium))
-                        }
+                    } label: {
+                        Text("Speed Test")
+                            .foregroundStyle(.white)
+                            .font(Font.title3.weight(.medium))
                     }
                     
-                }.padding(.bottom, isSE ? 30 : 60)
+                    Button {
+                        withAnimation {
+                            selection = 2
+                            offsetX = 135
+                        }
+                    } label: {
+                        Text("Magnetic")
+                            .foregroundStyle(.white)
+                            .font(Font.title3.weight(.medium))
+                    }
+                }
                 
+            }.padding(.bottom, isSE ? 30 : 60)
+            
             if selection == 1 {
                 ZStack {
                     Circle()
@@ -129,14 +129,14 @@ struct ToolsView: View {
                 }.padding(.bottom, isSE ? 16 : 48)
                     .onAppear {
                         withAnimation {
-                        
+                            
                             vm.startSpeedTest()
                         }
-                               }
+                    }
                     .onDisappear {
                         vm.stopSpeedTest()
-                        vm.downloadSpeedResult = 0.0
-                        vm.uploadSpeedResult = 0.0
+                        vm.downloadSpeedResult = 0.1
+                        vm.uploadSpeedResult = 0.1
                     }
                 
                 HStack(spacing: 18) {
@@ -158,88 +158,29 @@ struct ToolsView: View {
                     Text(vm.timer == nil ? "Start" : "Stop")
                         .foregroundStyle(.white)
                         .font(Font.title3.weight(.medium))
-                        .frame(maxWidth: .infinity) 
+                        .frame(maxWidth: .infinity)
                         .padding(.vertical)
                         .background(RoundedRectangle(cornerRadius: 30).foregroundStyle(.blue))
                 }.padding()
-                    
-               
+                
+                
             }
             
             if selection == 2 {
                 ZStack {
-                    Circle()
-                        .trim(from: 0.0, to: 0.73)
-                        .stroke(
-                            style: StrokeStyle(
-                                lineWidth: 25, // Adjust the line width as needed
-                                lineCap: .round
-                            )
-                        )
-                        .foregroundColor(.white)
-                        .rotationEffect(.degrees(-220)) // Start the stroke from the top
-                        .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
-                    
-                    Circle()
-                        .trim(from: 0.0, to: 0.73)
-                        .stroke(
-                            style: StrokeStyle(
-                                lineWidth: 25, // Adjust the line width as needed
-                                lineCap: .round
-                            )
-                        )
-                        .foregroundColor(.red.opacity(0.5))
-                        .rotationEffect(.degrees(-220)) // Start the stroke from the top
-                        .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
-                    
-                    Circle()
-                        .trim(from: 0.0, to: 0.55)
-                        .stroke(
-                            style: StrokeStyle(
-                                lineWidth: 25, // Adjust the line width as needed
-                                lineCap: .round
-                            )
-                        )
-                        .foregroundColor(.red)
-                        .rotationEffect(.degrees(-220)) // Start the stroke from the top
-                        .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
-                    
-                    
-                    Circle()
-                        .trim(from: 0.0, to: 0.36)
-                        .stroke(
-                            style: StrokeStyle(
-                                lineWidth: 25, // Adjust the line width as needed
-                                lineCap: .round
-                            )
-                        )
-                        .foregroundColor(.yellow)
-                        .rotationEffect(.degrees(-220)) // Start the stroke from the top
-                        .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
-                    
-                    Circle()
-                        .trim(from: 0.0, to: 0.18)
-                        .stroke(
-                            style: StrokeStyle(
-                                lineWidth: 25, // Adjust the line width as needed
-                                lineCap: .round
-                            )
-                        )
-                        .foregroundColor(.blue)
-                        .rotationEffect(.degrees(-220)) // Start the stroke from the top
-                        .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
+                    MagneticPic()
                     
                     Image("path")
-                              .resizable()
-                              .aspectRatio(contentMode: .fit)
-                              .frame(width: isSE ? 50 : 90, height: isSE ? 50 : 90)
-                              .offset(y: -30)
-                              .rotationEffect(Angle(degrees: -135))
-                              .rotationEffect(Angle(degrees: vm.rotationAngleMagnetic))
-                              .animation(.easeInOut(duration: 2), value: vm.rotationAngleMagnetic)
-
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: isSE ? 50 : 90, height: isSE ? 50 : 90)
+                        .offset(y: -30)
+                        .rotationEffect(Angle(degrees: -135))
+                        .rotationEffect(Angle(degrees: vm.rotationAngleMagnetic))
+                        .animation(.easeInOut(duration: 2), value: vm.rotationAngleMagnetic)
+                    
                 }.padding(.top, 0)
-                .padding(.bottom, isSE ? 25 : 50)
+                    .padding(.bottom, isSE ? 25 : 50)
                 
                     .onDisappear {
                         withAnimation {
@@ -277,14 +218,16 @@ struct ToolsView: View {
                         .padding(.vertical)
                         .background(RoundedRectangle(cornerRadius: 30).foregroundStyle(.blue))
                 }.padding()
-                  
+                
             }
             
         }.background(Color.black)
+        .padding(.bottom, isSE ? 70 : 50)
         
-
-            .padding(.bottom, isSE ? 70 : 40)
-            
+        .alert(isPresented: $vm.checkAlert) {
+            Alert(title: Text("Unsuccessful test"), message: Text("Please make sure your Wi-Fi is turned on and try again"))
+        }
+        
     }
 }
 #Preview {
@@ -312,7 +255,7 @@ struct SpeedOption: View {
                     .font( isSE ? Font.title3.weight(.semibold) : Font.title.weight(.semibold))
                     .foregroundStyle(.white)
                     .frame(width: isSE ? 70 : 100, alignment: .leading)
-
+                
                 Text("Mbps")
                     .foregroundStyle(.white)
             }
@@ -320,5 +263,72 @@ struct SpeedOption: View {
             .background(RoundedRectangle(cornerRadius: 24)
                 .foregroundStyle(.tabbarBlack)
                 .frame(width: isSE ? 160 : 190))
+    }
+}
+
+struct MagneticPic: View {
+    var body: some View {
+        ZStack {
+            Circle()
+                .trim(from: 0.0, to: 0.73)
+                .stroke(
+                    style: StrokeStyle(
+                        lineWidth: 25, // Adjust the line width as needed
+                        lineCap: .round
+                    )
+                )
+                .foregroundColor(.white)
+                .rotationEffect(.degrees(-220)) // Start the stroke from the top
+                .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
+            
+            Circle()
+                .trim(from: 0.0, to: 0.73)
+                .stroke(
+                    style: StrokeStyle(
+                        lineWidth: 25, // Adjust the line width as needed
+                        lineCap: .round
+                    )
+                )
+                .foregroundColor(.red.opacity(0.5))
+                .rotationEffect(.degrees(-220)) // Start the stroke from the top
+                .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
+            
+            Circle()
+                .trim(from: 0.0, to: 0.55)
+                .stroke(
+                    style: StrokeStyle(
+                        lineWidth: 25, // Adjust the line width as needed
+                        lineCap: .round
+                    )
+                )
+                .foregroundColor(.red)
+                .rotationEffect(.degrees(-220)) // Start the stroke from the top
+                .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
+            
+            
+            Circle()
+                .trim(from: 0.0, to: 0.36)
+                .stroke(
+                    style: StrokeStyle(
+                        lineWidth: 25, // Adjust the line width as needed
+                        lineCap: .round
+                    )
+                )
+                .foregroundColor(.yellow)
+                .rotationEffect(.degrees(-220)) // Start the stroke from the top
+                .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
+            
+            Circle()
+                .trim(from: 0.0, to: 0.18)
+                .stroke(
+                    style: StrokeStyle(
+                        lineWidth: 25, // Adjust the line width as needed
+                        lineCap: .round
+                    )
+                )
+                .foregroundColor(.blue)
+                .rotationEffect(.degrees(-220)) // Start the stroke from the top
+                .frame(width: isSE ? 200 : 250, height: isSE ? 200 : 250)
+        }
     }
 }

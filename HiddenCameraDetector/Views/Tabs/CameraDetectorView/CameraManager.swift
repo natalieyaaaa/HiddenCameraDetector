@@ -9,10 +9,16 @@ import Foundation
 import SwiftUI
 import AVFoundation
 
+class CameraViewModel: ObservableObject {
+    @Published var showAlert = false
+}
 
 struct CameraView: UIViewControllerRepresentable {
+    @ObservedObject var viewModel: CameraViewModel
+
     func makeUIViewController(context: Context) -> CameraViewController {
         let cameraViewController = CameraViewController()
+        cameraViewController.viewModel = viewModel
         return cameraViewController
     }
 
@@ -22,6 +28,9 @@ struct CameraView: UIViewControllerRepresentable {
 }
 
 class CameraViewController: UIViewController {
+    
+    var viewModel: CameraViewModel?
+
     var captureSession: AVCaptureSession?
 
     override func viewDidLoad() {
@@ -35,6 +44,7 @@ class CameraViewController: UIViewController {
 
         guard let backCamera = AVCaptureDevice.default(for: .video) else {
             print("Unable to access back camera!")
+            viewModel?.showAlert = true
             return
         }
 
@@ -43,6 +53,7 @@ class CameraViewController: UIViewController {
             captureSession?.addInput(input)
         } catch let error {
             print("Error unable to initialize back camera:  \(error.localizedDescription)")
+            viewModel?.showAlert = true
             return
         }
 
