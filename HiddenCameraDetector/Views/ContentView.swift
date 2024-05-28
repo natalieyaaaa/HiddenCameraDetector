@@ -108,7 +108,7 @@ struct ContentView: View {
                     .background(Color.tabbarBlack)
                         .cornerRadius(46)
                         .shadow(color: Color(red: 0.93, green: 0.97, blue: 1).opacity(0.15), radius: 15, x: 0, y: -4)
-                    .offset(y: isSE ? 45 : 55)
+                    .offset(y: isSE ? 47 : 60)
                 
             }.zIndex(2)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

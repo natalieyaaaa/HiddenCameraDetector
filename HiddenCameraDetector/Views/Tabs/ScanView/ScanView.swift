@@ -115,9 +115,10 @@ struct ScanView: View {
                     Spacer()
                 }
             }.background(Color.black.ignoresSafeArea())
-        }.alert(isPresented: $vm.checkAlert) {
-            Alert(title: Text("Unsuccessful scanning"), message: Text("Please make sure your Bluetooth and Wi-Fi are turned on and try again"))
+        }            .alert(isPresented: $vm.bluetoothAlert) {
+            Alert(title: Text(vm.alertTitle), message: Text(vm.alertText), dismissButton: .default(Text("OK")))
         }
+
     }
 }
 
