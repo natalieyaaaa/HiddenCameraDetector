@@ -117,7 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				203A316D2BFCC3B900A0910B /* ContentView.swift */,
-				203A31812BFCCB2400A0910B /* GuidesView.swift */,
 				203A317A2BFCCA7700A0910B /* Tabs */,
 				206E31932C04DBAC0035D05B /* SettingsView.swift */,
 			);
@@ -127,6 +126,7 @@
 		203A317A2BFCCA7700A0910B /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				203A31812BFCCB2400A0910B /* GuidesView.swift */,
 				202537B92C0362090069F8BD /* CameraDetectorView */,
 				203A319B2C00B43F00A0910B /* ToolsView */,
 				203A31902BFF4A9000A0910B /* ScanView */,
