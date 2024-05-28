@@ -83,11 +83,11 @@ class ToolsViewModel: ObservableObject {
             else if approximateResult <= 100 { self.progress =  CGFloat(0.27 + ((approximateResult - 50) * 0.09 / 50))}
             else if approximateResult <= 250 { self.progress =  CGFloat(0.36 + ((approximateResult - 150) * 0.09 / 150))}
             else if approximateResult <= 500 { self.progress =  CGFloat(0.45 + ((approximateResult - 250) * 0.09 / 250))}
-            else if approximateResult <= 750 { self.progress =  CGFloat(0.55 + ((approximateResult - 250) * 0.09 / 250))}
-            else if approximateResult <= 1000 { self.progress =  CGFloat(0.64 + ((approximateResult - 250) * 0.09 / 250))}
+            else if approximateResult <= 750 { self.progress =  CGFloat(0.55 + ((approximateResult - 500) * 0.09 / 250))}
+            else if approximateResult <= 1000 { self.progress =  CGFloat(0.64 + ((approximateResult - 750) * 0.09 / 250))}
             else if approximateResult >= 1000 { self.progress =  CGFloat(0.73); self.progress = 270; return}
 
-            
+            guard self.progress <= 270 else { self.progress = 270; return}
             self.rotationAngleSpeed = self.progress * 270 / 0.73
         }
     }
