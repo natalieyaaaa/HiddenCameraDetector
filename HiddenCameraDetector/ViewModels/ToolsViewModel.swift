@@ -125,7 +125,7 @@ class ToolsViewModel: ObservableObject {
             }
             
             let downloadTime = CFAbsoluteTimeGetCurrent() - startTime
-            let downloadSpeed = Double(data?.count ?? 0) / downloadTime / 1024 / 2 // Convert to Mbps
+            let downloadSpeed = Double(data?.count ?? 0) / downloadTime / 1024 / 4 // Convert to Mbps
             
             completion(downloadSpeed)
         }

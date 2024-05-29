@@ -12,6 +12,7 @@ struct ScanView: View {
     @Binding var selection: Int
     
     @EnvironmentObject var vm: ScanViewModel
+    @ObservedObject var bluetoothManager = BluetoothManager()
     
     var body: some View {
         NavigationView {
@@ -47,6 +48,7 @@ struct ScanView: View {
                     
                     Button {
                         withAnimation {
+                            bluetoothManager.checkAndShowBluetoothPermissionAlert()
                             vm.scanButton()
                         }
                     } label: {

@@ -39,7 +39,7 @@ final class ScanViewModel: ObservableObject {
         // Check if Bluetooth is on before starting the scan
         guard bluetoothManager.isBluetoothOn() else {
             self.bluetoothAlert = true
-            self.alertTitle = "Blutooth is off"
+            self.alertTitle = "Bluetooth is off"
             self.alertText = "The app needs Bluetooth to scan for nearby Bluetooth devices so please turn it on in the Settings"
             return
         }
@@ -120,11 +120,48 @@ final class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelega
     @Published var peripherals: [DeviceInfo] = []
     @Published var bluetoothOff = false
     
+    
     override init() {
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
+    func checkAndShowBluetoothPermissionAlert() {
+        let bluetoothAuthorizationStatus = CBManager.authorization
+        switch bluetoothAuthorizationStatus {
+        case .restricted, .denied, .notDetermined:
+            showBluetoothPermissionAlert()
+        case .allowedAlways:
+            print("Bluetooth usage is authorized always.")
+        @unknown default:
+            fatalError("Unknown authorization status")
+        }
+    }
     
+    private func showBluetoothPermissionAlert() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else {
+            return
+        }
+        
+        let alertController = UIAlertController(title: "No Access to Bluetooth",
+                                                message: "The app requires access to Bluetooth to search for devices around you.",
+                                                preferredStyle: .alert)
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+            if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(appSettings)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alertController.addAction(settingsAction)
+        alertController.addAction(cancelAction)
+        
+        window.rootViewController?.present(alertController, animated: true, completion: nil)
+    }
+    
+
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         bluetoothOff = false
         if central.state == .poweredOn {
