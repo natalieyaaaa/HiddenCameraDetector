@@ -58,8 +58,22 @@ struct ScanView: View {
                         
                     }.frame(width: 300, height: 300)
                         .background(Image(vm.isScanning ? "scanning.button" : "start.scan.button"))
-                        .padding(.bottom, isSE ? 28 : 52)
+                        .padding(.bottom, isSE ? 25 : 49)
                         .disabled(vm.isScanning)
+                    
+                    VStack(spacing: 8) {
+                        
+                    if vm.devices.count > 3 {
+                        HStack(spacing: 8) {
+                            Image("sus")
+                            Text("High risk being secretly photographed")
+                                .foregroundStyle(.white)
+                        }.padding(.vertical, 8)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .background(RoundedRectangle(cornerRadius: 16)
+                                .foregroundStyle(.suspiciousRed)
+                              )
+                    }
                     
                     HStack {
                         Text("Found devices")
@@ -89,7 +103,7 @@ struct ScanView: View {
                     }.padding(.horizontal, 32)
                         .padding(.bottom, 8)
                     
-                    VStack {
+                   
                         if vm.devices.isEmpty {
                             
                             Image("not.found")
@@ -97,7 +111,6 @@ struct ScanView: View {
                                 .padding(.top, isSE ? 10 : 42)
                             
                         } else {
-                            VStack(spacing: 8) {
                                 ForEach(vm.devices, id: \.id) {device in
                                     NavigationLink {
                                         DeviceDetailView(device: device)
@@ -108,11 +121,10 @@ struct ScanView: View {
                                         DeviceShortView(device: device)
                                     }
                                 }
-                            }.padding(.horizontal)
                                 .padding(.bottom, 60)
                             
                         }
-                    }
+                    }.padding(.horizontal)
                     
                     Spacer()
                 }

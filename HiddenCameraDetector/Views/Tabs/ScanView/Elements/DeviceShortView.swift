@@ -25,9 +25,14 @@ struct DeviceShortView: View {
             Spacer()
             
             if device.isSuspicious {
-                Text("Attention")
-                    .foregroundStyle(.red)
-                    .font(Font.headline.weight(.medium))
+                HStack(spacing: 5) {
+                    Text("Attention")
+                        .foregroundStyle(.red)
+                        .font(Font.headline.weight(.medium))
+                    Image("sus")
+                        .renderingMode(.template)
+                        .foregroundStyle(.suspiciousRed)
+                }
                 Spacer()
             }
                 Image("arrow")

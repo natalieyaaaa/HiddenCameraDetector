@@ -73,7 +73,7 @@ final class ScanViewModel: ObservableObject {
                 
                 guard !self.lanScanner.connectedDevices.isEmpty else { stopScanning(); return }
                 for device in self.lanScanner.connectedDevices {
-                    self.devicesInfo.append(DeviceInfo(name: device.name, connectionType: "Wi-Fi", ipAdress: device.ipAddress, id: device.id, date: formatDateToString(date: .now), isSuspicious: device.id.uuidString.contains("123")))
+                    self.devicesInfo.append(DeviceInfo(name: device.name, connectionType: "Wi-Fi", ipAdress: device.ipAddress, id: device.id, date: formatDateToString(date: .now), isSuspicious: isIpAdress(device.name)))
                 }
                 
                 self.bluetoothManager.centralManager.stopScan()
@@ -112,6 +112,7 @@ final class ScanViewModel: ObservableObject {
             }
         }
     }
+    
 }
 
 final class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
@@ -173,7 +174,7 @@ final class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelega
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         if !peripherals.contains(where: { $0.id == peripheral.identifier }) {
-            peripherals.append(DeviceInfo(name: peripheral.name ?? "No name", connectionType: "Bluetooth", ipAdress: "Not Available", id: peripheral.identifier, date: formatDateToString(date: .now), isSuspicious: peripheral.identifier.uuidString.contains("123")))
+            peripherals.append(DeviceInfo(name: peripheral.name ?? "No name", connectionType: "Bluetooth", ipAdress: "Not Available", id: peripheral.identifier, date: formatDateToString(date: .now), isSuspicious: isIpAdress(peripheral.name ?? "")))
         }
     }
     
@@ -228,4 +229,15 @@ public func formatDateToString(date: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "dd.MM.yyyy-HH:mm"
     return dateFormatter.string(from: date)
+}
+
+
+public func isIpAdress(_ ipAddress: String) -> Bool {
+    let ipv4Pattern = "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+    let ipv6Pattern = "((([0-9a-fA-F]{1,4}:){7}([0-9a-fA-F]{1,4}|:))|(([0-9a-fA-F]{1,4}:){6}(:[0-9a-fA-F]{1,4}|(:[0-9a-fA-F]{1,4}){1,2}|:))|(([0-9a-fA-F]{1,4}:){5}((:[0-9a-fA-F]{1,4}){1,3}|:))|(([0-9a-fA-F]{1,4}:){4}((:[0-9a-fA-F]{1,4}){1,4}|:))|(([0-9a-fA-F]{1,4}:){3}((:[0-9a-fA-F]{1,4}){1,5}|:))|(([0-9a-fA-F]{1,4}:){2}((:[0-9a-fA-F]{1,4}){1,6}|:))|(([0-9a-fA-F]{1,4}:){1}((:[0-9a-fA-F]{1,4}){1,7}|:))|(:((:[0-9a-fA-F]{1,4}){1,8}|:)))"
+    
+    let ipv4Predicate = NSPredicate(format: "SELF MATCHES %@", ipv4Pattern)
+    let ipv6Predicate = NSPredicate(format: "SELF MATCHES %@", ipv6Pattern)
+    
+    return ipv4Predicate.evaluate(with: ipAddress) || ipv6Predicate.evaluate(with: ipAddress)
 }
