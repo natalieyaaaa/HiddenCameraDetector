@@ -24,3 +24,9 @@ extension View {
     var isDevicePad: Bool { return UIDevice.current.userInterfaceIdiom == .pad }
     var screen: CGRect { return UIScreen.main.bounds }
 }
+
+public func triggerHapticFeedback() {
+    let generator = UIImpactFeedbackGenerator(style: .medium)
+    generator.prepare()
+    generator.impactOccurred()
+}
